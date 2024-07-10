@@ -9,6 +9,8 @@
 
 <br>
 
+**Hey, this is a little Project of mine, that i have been working on the past week. Its an Arduino Script wich sets up an AP and hosts a Website with wich you can control a RS485 Device.**
+
 # Items Used
 1. [Arduino MKR 1010 Wifi](https://store.arduino.cc/products/arduino-mkr-wifi-1010)
 2. [Arduino MKR 485 Shield](https://store.arduino.cc/products/arduino-mkr-485-shield)
@@ -73,11 +75,11 @@ void loop() {
 (for more details, visit -> [Arduino RS485 Shield Tutorial](https://docs.arduino.cc/tutorials/mkr-485-shield/mkr-485-communication/))
 
 ## Step 3: Set Up the Main code
-1. Open the given files in your IDE and Change the [AP Settings](./src/arduino_secrets.h) to your liking
-2. In the [Main File](./src/ArduinoWLAN_1_2.ino) change the Serial (line 25) and RS485 (line 58) Baud rate to your needs
+1. Open the given files in your IDE and Change the [AP Settings](./src/arduino_secrets.h) to your liking.
+2. In the [Main File](./src/ArduinoWLAN_1_2.ino) change the Serial (line 25) and RS485 (line 58) Baud rates to your needs.
 3. Upload the Code to your Arduino and Open the Website. The IP address is Printed in the Serial Monitor.
-4. Now you should see the Website I made. [Explanation of the Website](#website)
-5. To Change it to your Needs, check out [Personalize](#personalize)
+4. Now you should see the Website I made [Explanation of the Website](#website).
+5. To Change it to your Needs, check out [Personalize](#personalize).
 
 ## Website:
 ![Default Website](/images/website.png "Website")
@@ -92,24 +94,24 @@ Sends a f0<-given number-> used for setting the Destination Position
 - Send Anything:
 Sends your input
 
-- Current Motor Mode
+- Current Motor Mode:
 Live updated Value for current Motormode
 
-- The 8 Buttons
+- The 8 Buttons:
 They send the command which is labeled on them used for said things
 
-- Clear List (The ninth button)
+- Clear List (The ninth button):
 Clearing the list
 
-- Request(1)
+- Request(1):
 Shows the action you have clicked
 
-- Response(2)
+- Response(2):
 Shows the Response for your command
 
 
 # Personalize
-You can / have to customize the code so that it works for your needs.
+You can customize the code so that it fits your needs.
 
 ## How it Works
 The whole Website to Server Communication works with /something calls.
@@ -123,26 +125,26 @@ For Example:
 ```
 If you click the one of the buttons, a /something is being sent. This will be caught by the [httphandler](/src/httpHandler.ino) script.
 
-In the ```handleClientRequest``` function checks if the request is for specific endpoints (e.g., /RT, /BT, /hardwareversion, etc.) and performs corresponding actions like toggling LEDs or sending data.
+The ```handleClientRequest``` function checks if the request is for a specific endpoints (e.g., /RT, /BT, /hardwareversion, etc.) and performs corresponding actions like toggling LEDs or sending data.
 
 The Variable Values are marked with %something% in the [website code](/src/webpageCode.h). In the ```sendHttpResponse``` function in [httpHandler](/src/httpHandler.ino) these values are replaced with the real up-to-Date values.
 
 ## Website
-The Website's can be edited with HTML and CSS. I tried to add JS but didnt get it to work properly.
+The Website's can be edited with HTML and CSS.
 
 Source Code for the Website -> [webpageCode.h](/src/webpageCode.h)
 The Websites Code has to be saved in the Webpage Char.
 
 ### Example: Change a Button
 To Change for Example the ```a0: Hardwareversion``` Button, you would:
-1. Change the ```/hardwareversion``` in [WebpageCode](/src/webpageCode.h) to something else
+1. Change the ```/hardwareversion``` in [WebpageCode](/src/webpageCode.h) to something else.
 2. In the [httpHandler](/src/httpHandler.ino) you have to change the Entry in ```handleClientRequest``` to a new name.
 3. Then either put your code directly in the else if or call a function.
 
 ### Example: Change Header
-1. Open [webpageCode.h](/src/webpageCode.h)
-2. Navigate to the Body and find the H1 Section
-3. Change AG05 Control to something Different
+1. Open [webpageCode.h](/src/webpageCode.h).
+2. Navigate to the Body and find the H1 Section.
+3. Change AG05 Control to something Different.
 ```HTML
     <h1>AG05 Control</h1>
 ```
