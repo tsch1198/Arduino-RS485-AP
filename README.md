@@ -82,7 +82,9 @@ void loop() {
 5. To Change it to your Needs, check out [Personalize](#personalize).
 
 ## Website:
-![Default Website](/images/website.png "Website")
+<p align="center" width="100%">
+    <img src="/images/website.png" alt="Default Website">
+</p>
 
 In the Basic Configuration, the website works this way, everything you put in or click is being send via RS485.
 In the Request(1) List it shows the action you have clicked and in the Response(2) it shows the Response.
