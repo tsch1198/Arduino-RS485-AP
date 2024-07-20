@@ -85,7 +85,7 @@ const char webpage[] PROGMEM = R"rawliteral(
     </div>
   </div>
   <div class="footer">
-    <p>Copyright © https://github.com/tsch1198</p>
+    <p>Made By: https://github.com/tsch1198</p>
   </div>
 </body>
 </html>
