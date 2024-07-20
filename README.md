@@ -76,7 +76,7 @@ void loop() {
 
 ## Step 3: Set up the main code
 1. Open the given files and change the [AP Settings](./src/arduino_secrets.h) to your liking.
-2. In the [main file](./src/ArduinoWLAN_1_2.ino) change the serial (line 25) and RS485 (line 58) Baud rates to your needs.
+2. In the [main file](./src/RS485-AP-Website.ino) change the serial (line 25) and RS485 (line 58) Baud rates to your needs.
 3. Upload the code to your Arduino and open the website. The IP address is printed in the serial monitor.
 4. Now you should see the website I made. [Explanation of the website](#website).
 5. To change it to your needs, check out [Personalize](#personalize).
