@@ -3,13 +3,13 @@
       <img width="20%" src="/images/arduino-icon.svg">
   </p>
   <b><h3> Arduino RS485 </h3></b>
-  <p> Arduino Hosted Website Control for RS485 commands used to Control a RS485 device</a></p>
+  <p> Arduino hosted website control for RS485 commands used to control a RS485 device</a></p>
 </div>
 <br>
 
 <br>
 
-**Hey, this is a little project of mine, that i've been working on the past week. Its an Arduino script, which sets up an AP and hosts a website with which you can control a RS485 device.**
+**Hey, this is a little project of mine I've been working on for the past week. Its an Arduino script that sets up an AP and hosts a website that you can use to control a RS485 device.**
 
 # Items used
 1. [Arduino MKR 1010 Wifi](https://store.arduino.cc/products/arduino-mkr-wifi-1010)
@@ -48,7 +48,7 @@ The first step is to test if the Arduino works as it should.
 
 For testing:
 1. Connect the other ends of the Y and Z cables to your USB adapter.
-2. Install the ArduinoRS485 library and upload this code to your Arduino:
+2. Install the ArduinoRS485 library and upload this code:
 ```Cpp
 #include <ArduinoRS485.h>
 
@@ -69,19 +69,19 @@ void loop() {
   delay(1000);
 }
 ```
-1. After the upload was successful, open a serial monitor on the port of your RS485 to USB device (don't forget to use matching Baud rates)
-2. If everything is set up correctly, you should see a bunch of "hello xx"
+3. After the upload was successful, open a serial monitor on the port of your RS485 to USB device (don't forget to use matching Baud rates)
+4. If everything is set up correctly, you should see a bunch of "hello xx"
 
 (for more details, visit -> [Arduino RS485 Shield Tutorial](https://docs.arduino.cc/tutorials/mkr-485-shield/mkr-485-communication/))
 
 ## Step 3: Set up the main code
-1. Open the given files in your IDE and change the [AP Settings](./src/arduino_secrets.h) to your liking.
+1. Open the given files and change the [AP Settings](./src/arduino_secrets.h) to your liking.
 2. In the [main file](./src/ArduinoWLAN_1_2.ino) change the serial (line 25) and RS485 (line 58) Baud rates to your needs.
 3. Upload the code to your Arduino and open the website. The IP address is printed in the serial monitor.
-4. Now you should see the website I made [explanation of the website](#website).
+4. Now you should see the website I made. [Explanation of the website](#website).
 5. To change it to your needs, check out [Personalize](#personalize).
 
-## Website:
+# Website:
 <p align="center" width="100%">
     <img src="/images/website.png" alt="Default Website">
 </p>
@@ -89,7 +89,7 @@ void loop() {
 In the basic configuration, the website works this way, everything you put in or click is being send via RS485.
 In the Request(1) List it shows the action you have clicked and in the Response(2) it shows the response.
 
-**Note, the webserver runs on Arduino, so it's not very fast. You have to manually refresh after every interaction to see a response**
+**Note, the webserver runs on the Arduino itself, so it's not very fast. You have to manually refresh after every interaction to see a response**
 
 - Set Position:
 Sends a f0<-given number-> used for setting the destination position
@@ -110,10 +110,13 @@ Shows the action you have clicked
 
 - Response(2):
 Shows the response for your command
+
 # Personalize
 You can customize the code so that it fits your needs.
 
-## How it Works
+## How it works
+
+### Buttons and Inputs
 The whole website to server communication works with /something calls.
 For example:
 ```HTML
@@ -125,23 +128,24 @@ For example:
 ```
 If you click the one of the buttons, a /something is being sent. This will be caught by the [httphandler](/src/httpHandler.ino) script.
 
-The ```handleClientRequest``` function checks if the request is for a specific endpoints (e.g., /RT, /BT, /hardwareversion, etc.) and performs corresponding actions like toggling LEDs or sending data.
+The ```handleClientRequest``` function checks if the request is for a specific endpoint (e.g., /RT, /BT, /hardwareversion, etc.) and performs corresponding actions like toggling LEDs or sending data.
 
-The variable values are marked with %something% in the [website code](/src/webpageCode.h). In the ```sendHttpResponse``` function in [httpHandler](/src/httpHandler.ino) these values are replaced with the real up-to-date values.
+### Variable Values
+The variable values are marked with %something% in the [website code](/src/webpageCode.h). These values are replaced by the ``sendHttpResponse`` function in the [httpHandler](/src/httpHandler.ino).
 
 ## Website
 The website's Code can be edited with HTML and CSS.
 
-Source code for the website -> [webpageCode.h](/src/webpageCode.h)
+Source code for the website -> [webpageCode.h](/src/webpageCode.h).
 The websites code has to be saved in the webpage char.
 
-### Example: Change a Button
+### Example: Change a button
 To change for example the ```a0: Hardwareversion``` button, you would:
 1. Change the ```/hardwareversion``` in [WebpageCode](/src/webpageCode.h) to something else.
-2. In the [httpHandler](/src/httpHandler.ino) you have to change the entry in ```handleClientRequest``` to a new name.
+2. Give the entry in the ```handleClientRequest``` funktion from [httpHandler](/src/httpHandler.ino) a new name.
 3. Then either put your code directly in the else if or call a function.
 
-### Example: Change Header
+### Example: Change header
 1. Open [webpageCode.h](/src/webpageCode.h).
 2. Navigate to the body and find the H1 section.
 3. Change AG05 Control to something different.
